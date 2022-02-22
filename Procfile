@@ -1,0 +1,1 @@
+web: chmod a+x server_script.sh && ./server_script.sh
