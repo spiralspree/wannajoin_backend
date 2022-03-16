@@ -1,16 +1,30 @@
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 public class Main {
+    private final static Logger LOGGER = Logger.getLogger(CustomLogger.class.getName());
+
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        try {
+            CustomLogger.setup("Logs.txt", new SimpleFormatter());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        LOGGER.info("Application started");
+
         DataBaseManager dataBaseManager = new DataBaseManager();
         DataSource dataSource = dataBaseManager.getDataSource();
         TestTableDAO testTableDAO = new TestTableDAO(dataSource);
+
+        String retrievedText = null;
         try {
-            System.out.println("Query result: \"" + testTableDAO.getTextById(1) + "\"");
+            retrievedText = testTableDAO.getTextById(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        LOGGER.severe("Query result: \"" + retrievedText + "\"");
     }
 }
