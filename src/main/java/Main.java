@@ -19,12 +19,12 @@ public class Main {
         DataSource dataSource = dataBaseManager.getDataSource();
         TestTableDAO testTableDAO = new TestTableDAO(dataSource);
 
-        String retrievedText = null;
+        String retrievedText;
         try {
             retrievedText = testTableDAO.getTextById(1);
+            LOGGER.info("Query result: \"" + retrievedText + "\"");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.severe("DAO action failed.");
         }
-        LOGGER.severe("Query result: \"" + retrievedText + "\"");
     }
 }
