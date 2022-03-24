@@ -26,5 +26,11 @@ public class Main {
         } catch (SQLException e) {
             LOGGER.severe("DAO action failed.");
         }
+
+        try {
+            testTableDAO.addTextToTestTable();
+        } catch (SQLException e) {
+            LOGGER.severe("DAO action failed.");
+        }
     }
 }
