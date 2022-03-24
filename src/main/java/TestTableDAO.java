@@ -1,8 +1,9 @@
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.net.InetAddress;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.logging.Logger;
 
 public class TestTableDAO {
@@ -26,5 +27,27 @@ public class TestTableDAO {
         }
         LOGGER.info("Record found.");
         return resultSet.getString(1);
+    }
+
+    public void addTextToTestTable() throws SQLException {
+        LOGGER.info("DAO preparing action: addText");
+        String hostname = "Unknown";
+        try
+        {
+            InetAddress addr;
+            LOGGER.info("Trying to access host name...");
+            addr = InetAddress.getLocalHost();
+            hostname = addr.getHostName();
+        }
+        catch (Exception ex)
+        {
+            LOGGER.warning("Could not access host name.");
+        }
+        Connection con = dataSource.getConnection();
+        String now = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
+        LOGGER.info(String.format("Host name: %s, time: %s", hostname, now));
+        String sql = "INSERT INTO test_table (text) VALUES ('This text was added by the application at " + now + " by " + hostname + ".')";
+        con.createStatement().executeQuery(sql);
+        LOGGER.info("Insert into database succeeded.");
     }
 }
