@@ -1,9 +1,10 @@
+package com.spiralspree.wannajoin;
+
 import javax.sql.DataSource;
 import java.net.InetAddress;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.logging.Logger;
 
 public class TestTableDAO {

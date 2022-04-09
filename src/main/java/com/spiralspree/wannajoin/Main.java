@@ -1,3 +1,5 @@
+package com.spiralspree.wannajoin;
+
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;

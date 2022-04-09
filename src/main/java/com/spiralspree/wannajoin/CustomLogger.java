@@ -1,3 +1,5 @@
+package com.spiralspree.wannajoin;
+
 import java.io.IOException;
 import java.util.logging.*;
 import java.util.logging.Logger;
