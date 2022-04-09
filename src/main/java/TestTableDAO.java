@@ -47,7 +47,7 @@ public class TestTableDAO {
         String now = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
         LOGGER.info(String.format("Host name: %s, time: %s", hostname, now));
         String sql = "INSERT INTO test_table (text) VALUES ('This text was added by the application at " + now + " by " + hostname + ".')";
-        con.createStatement().executeQuery(sql);
+        con.createStatement().executeUpdate(sql);
         LOGGER.info("Insert into database succeeded.");
     }
 }
