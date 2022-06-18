@@ -2,6 +2,7 @@ package com.spiralspree.wannajoin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,15 +12,10 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-@RestController
 @EnableAutoConfiguration
+@SpringBootApplication
 public class Main {
     private final static Logger LOGGER = Logger.getLogger(CustomLogger.class.getName());
-
-    @RequestMapping("/")
-    String home(){
-        return "Hello world!";
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
