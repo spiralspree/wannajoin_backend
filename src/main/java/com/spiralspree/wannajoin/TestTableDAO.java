@@ -30,7 +30,7 @@ public class TestTableDAO {
         return resultSet.getString(1);
     }
 
-    public void addTextToTestTable() throws SQLException {
+    public int addTextToTestTable(String textToAdd) throws SQLException {
         LOGGER.info("DAO preparing action: addText");
         String hostname = "Unknown";
         try
@@ -47,8 +47,19 @@ public class TestTableDAO {
         Connection con = dataSource.getConnection();
         String now = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
         LOGGER.info(String.format("Host name: %s, time: %s", hostname, now));
-        String sql = "INSERT INTO test_table (text) VALUES ('This text was added by the application at " + now + " by " + hostname + ".')";
-        con.createStatement().executeUpdate(sql);
-        LOGGER.info("Insert into database succeeded.");
+        String sql = "INSERT INTO test_table (text) VALUES ('" + textToAdd + "') RETURNING id";
+        Statement statement = con.createStatement();
+        LOGGER.info("Executing query...");
+        statement.execute(sql);
+        LOGGER.info("Acquiring query result...");
+        ResultSet insertResult = statement.getResultSet();
+        if(insertResult.next()) {
+            int newId = insertResult.getInt(1);
+            LOGGER.info("Insertion into database succeeded. Returned ID for new record is: " + newId);
+            return newId;
+        } else {
+            LOGGER.severe("Acquiring ID of new record in TestTable FAILED.");
+            throw new SQLException("Could not acquire ID of new record in TestTable.");
+        }
     }
 }
