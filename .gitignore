@@ -3,3 +3,4 @@ target/
 *.class
 development_notes
 Logs.txt
+DBConnectionTestLogs.txt
