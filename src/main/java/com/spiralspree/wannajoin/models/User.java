@@ -8,8 +8,8 @@ import java.util.ArrayList;
 // TODO: implement Lombok for getters and reasonable setters
 public class User {
 
-    @Getter
-    private final String name;
+    @Getter @Setter
+    private String name;
     @Getter @Setter
     private ArrayList<User> friends = new ArrayList<>();
 
