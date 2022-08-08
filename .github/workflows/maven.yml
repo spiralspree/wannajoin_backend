@@ -10,6 +10,7 @@ on:
     branches: [ development ]
 
 jobs:
+#  TODO: refactor job content
   build:
 
     runs-on: ubuntu-latest
@@ -38,6 +39,7 @@ jobs:
           name: test-results
           path: ./DBConnectionTestLogs.txt
       - name: Run tests
+#        TODO: check if env set-up can be omitted here
         env:
           WANNAJOIN_DB_NAME: ${{ secrets.WANNAJOIN_DB_NAME }}
           WANNAJOIN_DB_PORT: ${{ secrets.WANNAJOIN_DB_PORT }}
