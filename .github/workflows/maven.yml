@@ -33,6 +33,11 @@ jobs:
           WANNAJOIN_DB_URL: ${{ secrets.WANNAJOIN_DB_URL }}
           WANNAJOIN_DB_USER: ${{ secrets.WANNAJOIN_DB_USER }}
         run: mvn test
+      - name: Archive test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: DBConnectionTestLogs.txt
       - run: git config --global user.name "spiralspree"
       - run: git config --global user.email "spiralspree@gmail.com"
       - run: git fetch --unshallow
