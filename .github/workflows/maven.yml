@@ -24,11 +24,12 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+      - name: Upload test artifact after build
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: test-results
           path: DBConnectionTestLogs.txt
-
       - name: Run tests
         env:
           WANNAJOIN_DB_NAME: ${{ secrets.WANNAJOIN_DB_NAME }}
