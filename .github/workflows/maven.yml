@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-results
-          path: DBConnectionTestLogs.txt
+          path: ./DBConnectionTestLogs.txt
       - name: Run tests
         env:
           WANNAJOIN_DB_NAME: ${{ secrets.WANNAJOIN_DB_NAME }}
