@@ -24,13 +24,6 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
-        env:
-          WANNAJOIN_DB_NAME: ${{ secrets.WANNAJOIN_DB_NAME }}
-          WANNAJOIN_DB_PORT: ${{ secrets.WANNAJOIN_DB_PORT }}
-          WANNAJOIN_DB_PW: ${{ secrets.WANNAJOIN_DB_PW }}
-          WANNAJOIN_DB_SERVER: ${{ secrets.WANNAJOIN_DB_SERVER }}
-          WANNAJOIN_DB_URL: ${{ secrets.WANNAJOIN_DB_URL }}
-          WANNAJOIN_DB_USER: ${{ secrets.WANNAJOIN_DB_USER }}
         run: mvn -B package --file pom.xml
       - name: Upload test artifact after build
         if: always()
