@@ -40,7 +40,7 @@ jobs:
           WANNAJOIN_DB_SERVER: ${{ secrets.WANNAJOIN_DB_SERVER }}
           WANNAJOIN_DB_URL: ${{ secrets.WANNAJOIN_DB_URL }}
           WANNAJOIN_DB_USER: ${{ secrets.WANNAJOIN_DB_USER }}
-        run: mvn test
+        run: mvn -DskipTests=false test
       - run: git config --global user.name "spiralspree"
       - run: git config --global user.email "spiralspree@gmail.com"
       - run: git fetch --unshallow
