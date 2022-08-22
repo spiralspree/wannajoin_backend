@@ -24,6 +24,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build with Maven
+#        TODO: try 'mvn compile' here and 'mvn test' at the test step, if works delete skipTests param from pom
         run: mvn -B package --file pom.xml
       - name: Upload test artifact after build
         if: always()
