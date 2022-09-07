@@ -25,12 +25,6 @@ jobs:
           cache: maven
       - name: Compile with Maven
         run: mvn -B compile --file pom.xml
-      - name: Upload test artifact after build
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: ./DBConnectionTestLogs.txt
       - name: Run tests
         env:
           WANNAJOIN_DB_NAME: ${{ secrets.WANNAJOIN_DB_NAME }}
@@ -40,6 +34,12 @@ jobs:
           WANNAJOIN_DB_URL: ${{ secrets.WANNAJOIN_DB_URL }}
           WANNAJOIN_DB_USER: ${{ secrets.WANNAJOIN_DB_USER }}
         run: mvn -DskipTests=false test
+      - name: Upload test artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: ./DBConnectionTestLogs.txt
       - name: Config user
         run: git config --global user.name "spiralspree" && git config --global user.email "spiralspree@gmail.com"
       - name: Deploy to master
