@@ -24,7 +24,6 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Compile with Maven
-#        TODO: try 'mvn compile' here and 'mvn test' at the test step, if works delete skipTests param from pom
         run: mvn -B compile --file pom.xml
       - name: Upload test artifact after build
         if: always()
@@ -33,7 +32,6 @@ jobs:
           name: test-results
           path: ./DBConnectionTestLogs.txt
       - name: Run tests
-#        TODO: check if env set-up can be omitted here
         env:
           WANNAJOIN_DB_NAME: ${{ secrets.WANNAJOIN_DB_NAME }}
           WANNAJOIN_DB_PORT: ${{ secrets.WANNAJOIN_DB_PORT }}
@@ -42,9 +40,7 @@ jobs:
           WANNAJOIN_DB_URL: ${{ secrets.WANNAJOIN_DB_URL }}
           WANNAJOIN_DB_USER: ${{ secrets.WANNAJOIN_DB_USER }}
         run: mvn -DskipTests=false test
-      - run: git config --global user.name "spiralspree"
-      - run: git config --global user.email "spiralspree@gmail.com"
-      - run: git fetch --unshallow
-      - run: git checkout master
-      - run: git merge development
-      - run: git push origin master
+      - name: Config user
+        run: git config --global user.name "spiralspree" && git config --global user.email "spiralspree@gmail.com"
+      - name: Deploy to master
+        run: git fetch --unshallow && git checkout master && git merge development && git push origin master
