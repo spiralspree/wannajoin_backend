@@ -29,7 +29,7 @@ jobs:
       - name: Compile with Maven
         run: mvn -B compile --file pom.xml
 
-      - name: Run tests
+      - name: Test and Package
         env:
           WANNAJOIN_DB_NAME: ${{ secrets.WANNAJOIN_DB_NAME }}
           WANNAJOIN_DB_PORT: ${{ secrets.WANNAJOIN_DB_PORT }}
@@ -37,7 +37,7 @@ jobs:
           WANNAJOIN_DB_SERVER: ${{ secrets.WANNAJOIN_DB_SERVER }}
           WANNAJOIN_DB_URL: ${{ secrets.WANNAJOIN_DB_URL }}
           WANNAJOIN_DB_USER: ${{ secrets.WANNAJOIN_DB_USER }}
-        run: mvn test
+        run: mvn package
 
       - name: Upload test artifact
         if: always()
