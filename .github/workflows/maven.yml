@@ -26,10 +26,10 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Compile with Maven
-        run: mvn -B compile --file pom.xml
+      - name: Compile
+        run: mvn clean compile
 
-      - name: Test and Package
+      - name: Test
         env:
           WANNAJOIN_DB_NAME: ${{ secrets.WANNAJOIN_DB_NAME }}
           WANNAJOIN_DB_PORT: ${{ secrets.WANNAJOIN_DB_PORT }}
@@ -37,7 +37,18 @@ jobs:
           WANNAJOIN_DB_SERVER: ${{ secrets.WANNAJOIN_DB_SERVER }}
           WANNAJOIN_DB_URL: ${{ secrets.WANNAJOIN_DB_URL }}
           WANNAJOIN_DB_USER: ${{ secrets.WANNAJOIN_DB_USER }}
-        run: mvn package
+        run: mvn clean test
+
+      - name: Package
+        env:
+          WANNAJOIN_DB_NAME: ${{ secrets.WANNAJOIN_DB_NAME }}
+          WANNAJOIN_DB_PORT: ${{ secrets.WANNAJOIN_DB_PORT }}
+          WANNAJOIN_DB_PW: ${{ secrets.WANNAJOIN_DB_PW }}
+          WANNAJOIN_DB_SERVER: ${{ secrets.WANNAJOIN_DB_SERVER }}
+          WANNAJOIN_DB_URL: ${{ secrets.WANNAJOIN_DB_URL }}
+          WANNAJOIN_DB_USER: ${{ secrets.WANNAJOIN_DB_USER }}
+        run: mvn clean package
+
 
       - name: Upload test artifact
         if: always()
