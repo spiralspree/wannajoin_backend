@@ -4,3 +4,4 @@ target/
 development_notes
 Logs.txt
 DBConnectionTestLogs.txt
+Logs.txt.lck
