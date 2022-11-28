@@ -1,9 +1,8 @@
 package com.spiralspree.wannajoin.models;
 
+import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name="test_table")
@@ -14,7 +13,7 @@ public class HbrntTestClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long Id;
+    private Long Id;
 
     @Column(name = "text")
     private String text;
