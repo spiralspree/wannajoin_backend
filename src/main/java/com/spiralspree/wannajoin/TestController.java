@@ -20,7 +20,9 @@ public class TestController {
     @GetMapping("")
     public String getHome() {
         HbrntTestClass testClass = new HbrntTestClass();
-        testClass.setText("This entry is made with JpaRepository.");
+        String hostName = EnvUtility.getHostName();
+        String now = EnvUtility.getFormattedTimeDate();
+        testClass.setText("Record by JpaRepository from host: " + hostName + " at: " + now);
         repo.save(testClass);
         return "Hello from TestController";
     }
