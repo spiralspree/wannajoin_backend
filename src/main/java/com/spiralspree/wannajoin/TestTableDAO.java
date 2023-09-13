@@ -32,21 +32,10 @@ public class TestTableDAO {
 
     public int addTextToTestTable(String textToAdd) throws SQLException {
         LOGGER.info("DAO preparing action: addText");
-        String hostname = "Unknown";
-        try
-        {
-            InetAddress addr;
-            LOGGER.info("Trying to access host name...");
-            addr = InetAddress.getLocalHost();
-            hostname = addr.getHostName();
-        }
-        catch (Exception ex)
-        {
-            LOGGER.warning("Could not access host name.");
-        }
+        String hostName = EnvUtility.getHostName();
         Connection con = dataSource.getConnection();
-        String now = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
-        LOGGER.info(String.format("Host name: %s, time: %s", hostname, now));
+        String now = EnvUtility.getFormattedTimeDate();
+        LOGGER.info(String.format("Host name: %s, time: %s", hostName, now));
         String sql = "INSERT INTO test_table (text) VALUES ('" + textToAdd + "') RETURNING id";
         Statement statement = con.createStatement();
         LOGGER.info("Executing query...");
