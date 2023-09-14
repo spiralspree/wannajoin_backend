@@ -55,4 +55,4 @@ jobs:
       - name: Create pull request to master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr create --base master --head development
+        run: gh pr create --base master --head development --fill
