@@ -62,4 +62,4 @@ jobs:
       - name: Merge pull request to master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr merge -r --admin
+        run: gh pr merge --merge --admin
