@@ -39,10 +39,10 @@ jobs:
         run: mvn clean compile
 
       - name: Test
-        run: mvn clean test
+        run: mvn test
 
       - name: Package
-        run: mvn clean package
+        run: mvn package
 
       - name: Upload test artifact
         if: always()
