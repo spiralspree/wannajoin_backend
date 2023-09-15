@@ -36,13 +36,13 @@ jobs:
           cache: maven
 
       - name: Compile
-        run: mvn clean compile
+        run: mvn clean compile -T 1C
 
       - name: Test
-        run: mvn test
+        run: mvn test -T 1C
 
       - name: Package
-        run: mvn package
+        run: mvn package -T 1C
 
       - name: Upload test artifact
         if: always()
