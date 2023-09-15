@@ -17,6 +17,7 @@ public class EnvUtility {
             {
                 LOGGER.info("Trying to access host name...");
                 EnvUtility.hostName = InetAddress.getLocalHost().getHostName();
+                LOGGER.info("Acquired hostname: " + EnvUtility.hostName);
             }
             catch (UnknownHostException ex)
             {
