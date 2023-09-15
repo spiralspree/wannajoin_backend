@@ -50,16 +50,3 @@ jobs:
         with:
           name: test-results
           path: ./DBConnectionTestLogs.txt
-
-      - name: Config user
-        run: git config --global user.name "spiralspree" && git config --global user.email "spiralspree@gmail.com"
-
-      - name: Create pull request to master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr create --base master --head development --fill
-
-      - name: Merge pull request to master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh pr merge --merge --admin
