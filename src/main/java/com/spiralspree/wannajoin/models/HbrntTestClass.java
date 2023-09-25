@@ -18,4 +18,6 @@ public class HbrntTestClass {
     @Column(name = "text")
     private String text;
 
+    public HbrntTestClass () {}
+
 }
