@@ -22,7 +22,7 @@ public class DBConnectionTest {
     private final static DataSource dataSource = dataBaseManager.getDataSource();
     private final static TestTableDAO testTableDAO = new TestTableDAO(dataSource);
     private static String textToInsert;
-    private static int retrievedID = -1;
+    private static int retrievedID;
     private static String hostName = EnvUtility.getHostName();
 
     @BeforeAll
@@ -43,11 +43,9 @@ public class DBConnectionTest {
         textToInsert = "Test record inserted from host: " + hostName + " at: " + now;
         try {
             retrievedID = testTableDAO.addTextToTestTable(textToInsert);
-            if(retrievedID == -1){
-                Assertions.fail("Acquiring ID of test record failed.");
-            }
         } catch (SQLException e) {
             LOGGER.severe("DAO action failed.");
+            Assertions.fail();
         }
     }
 
