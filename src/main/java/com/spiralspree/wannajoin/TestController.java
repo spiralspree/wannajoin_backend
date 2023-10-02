@@ -19,10 +19,10 @@ public class TestController {
     @CrossOrigin(origins = "https://sharp-carson-94751d.netlify.app/")
     @GetMapping("")
     public String getHome() {
-        HbrntTestClass testClass = new HbrntTestClass();
         String hostName = EnvUtility.getHostName();
         String now = EnvUtility.getFormattedTimeDate();
-        testClass.setText("Record by JpaRepository from host: " + hostName + " at: " + now);
+        String testText = ("Record by JpaRepository from host: " + hostName + " at: " + now);
+        HbrntTestClass testClass = new HbrntTestClass(testText);
         repo.save(testClass);
         return "Hello from TestController";
     }
