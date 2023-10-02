@@ -7,7 +7,6 @@ import lombok.Setter;
 @Entity
 @Table(name="test_table")
 @Getter
-@Setter
 public class HbrntTestClass {
 
     @Id
@@ -17,5 +16,11 @@ public class HbrntTestClass {
 
     @Column(name = "text")
     private String text;
+
+    protected HbrntTestClass () {}
+
+    public HbrntTestClass (String text) {
+        this.text = text;
+    }
 
 }

@@ -42,13 +42,18 @@ public class TestTableDAO {
         statement.execute(sql);
         LOGGER.info("Acquiring query result...");
         ResultSet insertResult = statement.getResultSet();
-        if(insertResult.next()) {
+        if (insertResult.next()) {
             int newId = insertResult.getInt(1);
-            LOGGER.info("Insertion into database succeeded. Returned ID for new record is: " + newId);
-            return newId;
+            if (newId != 0) {
+                LOGGER.info("Insertion into database succeeded. Returned ID for new record is: " + newId);
+                return newId;
+            } else {
+                LOGGER.severe("Acquired 0 as id number for new record. This is unintended behavior. Check query or database configuration!");
+                throw new SQLException("Acquired 0 as id number. This is unintended behavior. Check query, or database configuration!");
+            }
         } else {
             LOGGER.severe("Acquiring ID of new record in TestTable FAILED.");
-            throw new SQLException("Could not acquire ID of new record in TestTable.");
+            throw new SQLException("Acquiring ID of new record in TestTable FAILED.");
         }
     }
 }

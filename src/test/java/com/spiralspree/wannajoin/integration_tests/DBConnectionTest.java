@@ -2,6 +2,7 @@ package com.spiralspree.wannajoin.integration_tests;
 
 import com.spiralspree.wannajoin.CustomLogger;
 import com.spiralspree.wannajoin.DataBaseManager;
+import com.spiralspree.wannajoin.EnvUtility;
 import com.spiralspree.wannajoin.TestTableDAO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
@@ -23,7 +22,8 @@ public class DBConnectionTest {
     private final static DataSource dataSource = dataBaseManager.getDataSource();
     private final static TestTableDAO testTableDAO = new TestTableDAO(dataSource);
     private static String textToInsert;
-    private static int retrievedID = -1;
+    private static int retrievedID;
+    private static String hostName = EnvUtility.getHostName();
 
     @BeforeAll
     @Order(1)
@@ -39,15 +39,13 @@ public class DBConnectionTest {
     @BeforeAll
     @Order(2)
     static void insertTestRecordIntoDB() {
-        String now = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
-        textToInsert = "Test record inserted at: " + now;
+        String now = EnvUtility.getFormattedTimeDate();
+        textToInsert = "Test record inserted from host: " + hostName + " at: " + now;
         try {
             retrievedID = testTableDAO.addTextToTestTable(textToInsert);
-            if(retrievedID == -1){
-                Assertions.fail("Acquiring ID of test record failed.");
-            }
         } catch (SQLException e) {
             LOGGER.severe("DAO action failed.");
+            Assertions.fail();
         }
     }
 
